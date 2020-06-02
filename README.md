@@ -4,7 +4,7 @@ from the collection are sets of three images, each one represents one channel fr
 
 <p align="center">
   <img src="img/im4.jpg" height="450">
-  <img src="img/correlacion_normalizada_2.jpg" height="450">
+  <img src="results/correlacion_normalizada_2.jpg" height="450">
 </p>
 
 ## Procedure
