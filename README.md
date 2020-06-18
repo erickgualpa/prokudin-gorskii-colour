@@ -7,7 +7,8 @@ from the collection are sets of three images, each one represents one channel fr
   <img src="results/normalized_correlation_2.jpg" height="450">
 </p>
 
-## Procedure
+## Usage
+
 The program can be executed in 5 modes:
 
 * Calculating **Correlation (fft)** between the Fast Fourier Transforms from the images channels
@@ -16,9 +17,7 @@ The program can be executed in 5 modes:
 * Calculating **Correlation (edges)** between the Fast Fourier Transforms from the edges images channels
 * Calculating **Correlation (default)** between the image channels
 
-## Usage
-
-To execute the project just run the prokudin-gorskii-colour.py file with a Python 3 version. Results will be saved in the **results** directory.
+To execute it just run the prokudin-gorskii-colour.py file with a Python 3 version. Results will be saved in the **results** directory.
 
 ```console
 erickgualpa@erickgm:~$ python prokudin-gorskii-colour.py ./img/im1.jpg fft
