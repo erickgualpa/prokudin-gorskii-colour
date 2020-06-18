@@ -4,24 +4,23 @@ from the collection are sets of three images, each one represents one channel fr
 
 <p align="center">
   <img src="img/im4.jpg" height="450">
-  <img src="results/correlacion_normalizada_2.jpg" height="450">
+  <img src="results/normalized_correlation_2.jpg" height="450">
 </p>
 
-## Procedure
-The project can be executed in 5 modes:
-```python
-working_image = 2 # Set working image
-mode = "phase"    # "fft", "phase", "norm", "edges", None=(Space Convolution)
-```
-* Calculating the **Correlation** between the Fast Fourier Transforms from the images channels
-* Calculating the **Phase Correlation** between the Fast Fourier Transforms from the images channels
-* Calculating the **Normalized Correlation** between the image channels
-* Calculating the **Correlation** between the Fast Fourier Transforms from the edges images channels
-* Calculating the **Correlation** between the image channels
-
 ## Usage
-The program gets the working image from the **img/** directory and the results are saved in the **results** folder.
 
-To execute the project just run the prokudin-gorskii-colour.py file with a Python 3 version.
+The program can be executed in 5 modes:
 
-You can get the images samples from the collection here: [Prokudin-Gorskii Photography Collection](https://www.loc.gov/exhibits/empire/gorskii.html)
+* Calculating **Correlation (fft)** between the Fast Fourier Transforms from the images channels
+* Calculating **Phase Correlation (phase)** between the Fast Fourier Transforms from the images channels
+* Calculating **Normalized Correlation (norm)** between the image channels
+* Calculating **Correlation (edges)** between the Fast Fourier Transforms from the edges images channels
+* Calculating **Correlation (default)** between the image channels
+
+To execute it just run the prokudin-gorskii-colour.py file with a Python 3 version. Results will be saved in the **results** directory.
+
+```console
+erickgualpa@erickgm:~$ python prokudin-gorskii-colour.py ./img/im1.jpg fft
+```
+
+You can get sample images from the collection here: [Prokudin-Gorskii Photography Collection](https://www.loc.gov/exhibits/empire/gorskii.html)
