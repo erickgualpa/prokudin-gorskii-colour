@@ -4,7 +4,7 @@ from scipy import fftpack
 import numpy as np
 import matplotlib.pyplot as plt
 
-def showImage(image):
+def show_image(image):
     cv2.imshow('figure',image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
@@ -16,7 +16,7 @@ def resize(img, scale_percent):
     # resize image
     return cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
 
-def cropIn3Channels(image):
+def crop_in_3_channels(image):
     im_height = image.shape[0] 
     slice_size = (int) (im_height / 3)
     channels = {
@@ -74,7 +74,7 @@ def correlate_edges(image1, image2):
     return signal.fftconvolve(np.float64(image1), np.float64(image2[::-1,::-1]), mode='same')
 #####################################################################
 
-def fitAxisX(im1, im2):
+def fit_axis_x(im1, im2):
     borderType = cv2.BORDER_CONSTANT
     x_diff = im1.shape[1] - im2.shape[1]
     if x_diff > 0:
@@ -87,7 +87,7 @@ def fitAxisX(im1, im2):
 
     return im1, im2
 
-def fitAxisY(im1, im2):
+def fit_axis_y(im1, im2):
     borderType = cv2.BORDER_CONSTANT
     y_diff = im1.shape[0] - im2.shape[0]
     if y_diff > 0:
@@ -100,7 +100,7 @@ def fitAxisY(im1, im2):
 
     return im1, im2
 
-def mergePreProcessing(channel1, channel2, index1, index2):
+def merge_preprocessing(channel1, channel2, index1, index2):
     borderType = cv2.BORDER_CONSTANT
 
     y_diff = index1[0] - index2[0]
@@ -120,7 +120,7 @@ def mergePreProcessing(channel1, channel2, index1, index2):
         # Añadir 'y_diff' filas sobre la primera imagen
         im_A = cv2.copyMakeBorder(im_A, np.absolute(y_diff), 0, 0, 0, borderType, None, 0)
 
-    im_A,im_B = fitAxisY(im_A, im_B)
+    im_A,im_B = fit_axis_y(im_A, im_B)
 
     if x_diff > 0:
         # Añadir 'x_diff' columnas a la izquierda de la segunda imagen
@@ -130,13 +130,13 @@ def mergePreProcessing(channel1, channel2, index1, index2):
         # Añadir 'x_diff' columnas a la izquierda de la primera imagen
         im_A = cv2.copyMakeBorder(im_A, 0, 0, np.absolute(x_diff), 0, borderType, None, 0)
 
-    im_A,im_B = fitAxisX(im_A, im_B)
+    im_A,im_B = fit_axis_x(im_A, im_B)
 
     print("Channels new shape: ",im_A.shape, im_B.shape)
 
     return im_A, im_B
 
-def mergePreProcessingChannelsRGtoB(channelR, channelG, channelB, index1, index2):
+def merge_preprocessing_channelsRG_to_B(channelR, channelG, channelB, index1, index2):
     borderType = cv2.BORDER_CONSTANT
 
     y_diff = index1[0] - index2[0]
@@ -158,8 +158,8 @@ def mergePreProcessingChannelsRGtoB(channelR, channelG, channelB, index1, index2
         im_A = cv2.copyMakeBorder(im_A, np.absolute(y_diff), 0, 0, 0, borderType, None, 0)
         im_B = cv2.copyMakeBorder(im_B, np.absolute(y_diff), 0, 0, 0, borderType, None, 0)
 
-    im_A,im_C = fitAxisY(im_A, im_C)
-    im_B,im_C = fitAxisY(im_B, im_C)
+    im_A,im_C = fit_axis_y(im_A, im_C)
+    im_B,im_C = fit_axis_y(im_B, im_C)
 
     if x_diff > 0:
         # Añadir 'x_diff' columnas a la izquierda de la tercera imagen
@@ -170,14 +170,14 @@ def mergePreProcessingChannelsRGtoB(channelR, channelG, channelB, index1, index2
         im_A = cv2.copyMakeBorder(im_A, 0, 0, np.absolute(x_diff), 0, borderType, None, 0)
         im_B = cv2.copyMakeBorder(im_B, 0, 0, np.absolute(x_diff), 0, borderType, None, 0)
 
-    im_A,im_C = fitAxisX(im_A, im_C)
-    im_B,im_C = fitAxisX(im_B, im_C)
+    im_A,im_C = fit_axis_x(im_A, im_C)
+    im_B,im_C = fit_axis_x(im_B, im_C)
 
     print("Channels new shape: ",im_A.shape, im_B.shape, im_C.shape)
 
     return im_A, im_B, im_C
 
-def alignByConvolution(channels, mode=None):
+def align_by_convolution(channels, mode=None):
     im_R = channels['R'].copy()
     im_G = channels['G'].copy()
     im_B = channels['B'].copy()
@@ -216,7 +216,7 @@ def alignByConvolution(channels, mode=None):
     print("Convolution index CH_R_G: ", index_conv_R_G)
 
 
-    ch_R, ch_G = mergePreProcessing(im_R, im_G, index_conv_itself, index_conv_R_G)
+    ch_R, ch_G = merge_preprocessing(im_R, im_G, index_conv_itself, index_conv_R_G)
     #----------------------------------------------------------------#
 
     rgg = np.dstack((ch_R, ch_G, ch_G))
@@ -224,8 +224,8 @@ def alignByConvolution(channels, mode=None):
 
     #-- CONVOLUCIÓN DE LOS CANALES RG Y B ---------------------------#
     print("\n---- CHANNELS RG AND B CONVOLUTION")
-    rgg_gray, im_B = fitAxisX(rgg_gray, im_B)
-    rgg_gray, im_B = fitAxisY(rgg_gray, im_B)
+    rgg_gray, im_B = fit_axis_x(rgg_gray, im_B)
+    rgg_gray, im_B = fit_axis_y(rgg_gray, im_B)
     if mode=="fft":
         conv_itself = fftconvolve(rgg_gray, rgg_gray)
         conv_RG_B = fftconvolve(im_B, rgg_gray)
@@ -255,7 +255,7 @@ def alignByConvolution(channels, mode=None):
     print("Convolution itself index CH_RG: ", index_conv_itself)
     print("Convolution index CH_RG_B: ", index_conv_RG_B)
     
-    ch_R, ch_G, ch_B = mergePreProcessingChannelsRGtoB(ch_R, ch_G, im_B, index_conv_itself, index_conv_RG_B)
+    ch_R, ch_G, ch_B = merge_preprocessing_channelsRG_to_B(ch_R, ch_G, im_B, index_conv_itself, index_conv_RG_B)
     #----------------------------------------------------------------#
 
     return np.dstack((ch_R, ch_G, ch_B))
