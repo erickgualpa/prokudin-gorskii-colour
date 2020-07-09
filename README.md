@@ -1,6 +1,5 @@
 # Giving colour to the Prokudin-Gorskii photography collection
-This project tries to give colour to some images from the Prokudin-Gorskii collection. The original samples taken
-from the collection are sets of three images, each one represents one channel from the RGB colorspace.
+This project tries to give colour to some images from the Prokudin-Gorskii collection. The samples from this collection are sets of three images, each one representing a channel from the RGB colorspace.
 
 <p align="center">
   <img src="img/im4.jpg" height="450">
