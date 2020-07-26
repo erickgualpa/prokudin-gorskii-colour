@@ -1,4 +1,4 @@
-# Giving colour to the Prokudin-Gorskii photography collection
+# Giving colour to the Prokudin-Gorskii photography collection 
 This project tries to give colour to some images from the Prokudin-Gorskii collection. The samples from this collection are sets of three images, each one representing a channel from the RGB colorspace.
 
 <p align="center">
@@ -6,7 +6,7 @@ This project tries to give colour to some images from the Prokudin-Gorskii colle
   <img src="results/normalized_correlation_2.jpg" height="450">
 </p>
 
-## Usage
+## Usage :pencil:
 
 The program can be executed in 5 modes:
 
