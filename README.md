@@ -18,8 +18,8 @@ The program can be executed in 5 modes:
 
 To execute it just run the prokudin-gorskii-colour.py file with a Python 3 version. Results will be saved in the **results** directory.
 
-```console
-erickgualpa@erickgm:~$ python prokudin-gorskii-colour.py ./img/im1.jpg fft
+```sh
+python prokudin-gorskii-colour.py ./img/im1.jpg fft
 ```
 
 You can get sample images from the collection here: [Prokudin-Gorskii Photography Collection](https://www.loc.gov/exhibits/empire/gorskii.html)
